@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex City Channel | Master Forex Trading</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-orange: #FF6B00;
+            --secondary-orange: #FF8C42;
+            --dark-bg: #0A0A0A;
+            --dark-card: #1A1A1A;
+            --light-text: #F5F5F5;
+            --gray-text: #AAAAAA;
+            --accent-blue: #007BFF;
+            --success: #00CC88;
+            --danger: #FF4444;
+            --shadow: 0 5px 20px rgba(255, 107, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--light-text);
+            background-color: var(--dark-bg);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--light-text);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 2px 20px rgba(255, 107, 0, 0.15);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            color: var(--primary-orange);
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--primary-orange), #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--gray-text);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        nav ul li a i {
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-orange);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary-orange), #FF8C00);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+            cursor: pointer;
+        }
+
+        /* Hero Section with Slider */
+        .hero {
+            margin-top: 80px;
+            position: relative;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            animation: slide 25s infinite ease-in-out;
+        }
+
+        @keyframes slide {
+            0%, 20% { transform: translateX(0); }
+            25%, 45% { transform: translateX(-25%); }
+            50%, 70% { transform: translateX(-50%); }
+            75%, 95% { transform: translateX(-75%); }
+            100% { transform: translateX(-75%); }
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9));
+        }
+
+        .slide-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to right, #FF6B00, #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .slide-content p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+            color: var(--gray-text);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gray-text);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background: var(--primary-orange);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FF8C00, var(--primary-orange));
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .btn-outline::before {
+            background: var(--primary-orange);
+        }
+
+        .btn-outline:hover {
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1A1A1A, #0F0F0F);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--dark-card);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-bottom: 10px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-orange), #FF8C00);
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--dark-card);
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-orange), #FF8C00);
+            transform: scaleX(0);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-orange);
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+        }
+
+        /* Courses Page */
+        .courses-page {
+            padding-top: 100px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #1A1A1A, #0F0F0F);
+            padding: 150px 0 80px;
+            text-align: center;
+            margin-top: 70px;
+            border-bottom: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--primary-orange), #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .courses {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .course-card {
+            background: var(--dark-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 107, 0, 0.2);
+        }
+
+        .course-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .course-content {
+            padding: 30px;
+        }
+
+        .course-level {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 107, 0, 0.1);
+            color: var(--primary-orange);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 107, 0, 0.3);
+        }
+
+        .course-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin-top: 20px;
+        }
+
+        /* Books Section */
+        .books-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1A1A1A, #0F0F0F);
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .book-card {
+            background: var(--dark-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .book-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.15);
+        }
+
+        .book-img {
+            height: 200px;
+            background: linear-gradient(135deg, #2A2A2A, #1A1A1A);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--primary-orange);
+        }
+
+        .book-content {
+            padding: 25px;
+        }
+
+        .book-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            margin: 15px 0;
+        }
+
+        /* Groups Section */
+        .groups-section {
+            padding: 80px 0;
+            background: var(--dark-bg);
+        }
+
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .group-card {
+            background: var(--dark-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .group-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 15px 30px rgba(255, 107, 0, 0.15);
+        }
+
+        .group-header {
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            padding: 25px;
+            text-align: center;
+        }
+
+        .group-content {
+            padding: 25px;
+        }
+
+        .group-members {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .member-avatars {
+            display: flex;
+            margin-right: 15px;
+        }
+
+        .member-avatars span {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            margin-left: -10px;
+            border: 2px solid var(--dark-card);
+        }
+
+        .member-avatars span:first-child {
+            margin-left: 0;
+        }
+
+        /* Signals Page */
+        .signals-page {
+            padding-top: 100px;
+        }
+
+        .signals {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .signal-table-container {
+            overflow-x: auto;
+            margin: 40px 0;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+        }
+
+        .signal-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .signal-table th, .signal-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .signal-table th {
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .signal-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .signal-table tr:hover {
+            background: rgba(255, 107, 0, 0.05);
+        }
+
+        .profit {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .loss {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        /* About Page */
+        .about-page {
+            padding-top: 100px;
+        }
+
+        .team-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1A1A1A, #0F0F0F);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: var(--dark-card);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(255, 107, 0, 0.2);
+        }
+
+        .team-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+
+        .team-content {
+            padding: 30px;
+        }
+
+        .team-role {
+            color: var(--primary-orange);
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .team-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 107, 0, 0.1);
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .team-social a:hover {
+            background: var(--primary-orange);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Contact Page */
+        .contact-page {
+            padding-top: 100px;
+        }
+
+        .contact {
+            padding: 100px 0;
+            background: var(--dark-bg);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
+            background: var(--dark-card);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            border-color: rgba(255, 107, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 1.8rem;
+            color: var(--primary-orange);
+            margin-top: 5px;
+        }
+
+        .contact-form {
+            background: var(--dark-card);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--light-text);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light-text);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2);
+        }
+
+        /* Payment Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--dark-card);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            box-shadow: 0 20px 50px rgba(255, 107, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gray-text);
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary-orange);
+            transform: rotate(90deg);
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-orange);
+            background: rgba(255, 107, 0, 0.1);
+            transform: translateX(5px);
+        }
+
+        .payment-option.active {
+            border-color: var(--primary-orange);
+            background: rgba(255, 107, 0, 0.15);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-right: 20px;
+            color: var(--primary-orange);
+        }
+
+        .ussd-code {
+            background: rgba(255, 107, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            color: var(--primary-orange);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1A1A1A, #0A0A0A);
+            padding: 70px 0 30px;
+            border-top: 1px solid rgba(255, 107, 0, 0.2);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-orange), #FF8C00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-links h4, .footer-newsletter h4 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--light-text);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            color: var(--gray-text);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-orange);
+            transform: translateX(5px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px 0 0 8px;
+            color: var(--light-text);
+        }
+
+        .newsletter-form button {
+            background: linear-gradient(135deg, var(--primary-orange), #FF8C00);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: linear-gradient(135deg, #FF8C00, var(--primary-orange));
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-text);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero {
+                height: 500px;
+            }
+            
+            .slide-content h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                padding: 20px;
+                gap: 0;
+                backdrop-filter: blur(10px);
+                border-top: 1px solid rgba(255, 107, 0, 0.2);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+            }
+
+            nav ul li a {
+                padding: 15px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            nav ul li:last-child a {
+                border-bottom: none;
+            }
+
+            .hero {
+                height: 400px;
+            }
+
+            .slide-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .slide-content p {
+                font-size: 1.1rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid, .course-grid, .books-grid, .groups-grid, .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 350px;
+            }
+
+            .slide-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .btn {
+                padding: 14px 25px;
+                font-size: 0.9rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .page-header {
+                padding: 120px 0 60px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Page Transitions */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-city"></i>
+                </div>
+                <div class="logo-text">Forex City</div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#" data-page="home" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" data-page="courses"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+                    <li><a href="#" data-page="signals"><i class="fas fa-signal"></i> Signals</a></li>
+                    <li><a href="#" data-page="about"><i class="fas fa-users"></i> About Us</a></li>
+                    <li><a href="#" data-page="contact"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home-page" class="page">
+        <!-- Hero Slider -->
+        <div class="hero">
+            <div class="slider-container">
+                <div class="slider">
+                    <!-- Slide 1 -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h1>Master Forex Trading</h1>
+                            <p>Learn from industry experts with proven strategies and real-time market analysis</p>
+                            <button id="exploreCoursesBtn" class="btn"><i class="fas fa-graduation-cap"></i> Explore Our Courses</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 2 -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h1>Premium Trading Signals</h1>
+                            <p>Get accurate forex signals with 85%+ success rate. Maximize your profits</p>
+                            <button id="viewSignalsBtn" class="btn"><i class="fas fa-chart-line"></i> View Trading Signals</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 3 -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h1>Join Our Community</h1>
+                            <p>Connect with 10,000+ traders worldwide. Share insights and grow together</p>
+                            <button id="exploreCoursesBtn2" class="btn btn-outline"><i class="fas fa-users"></i> Join Community</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Slide 4 -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <h1>Start Your Journey</h1>
+                            <p>From beginner to professional trader. We provide all tools for success</p>
+                            <button id="viewSignalsBtn2" class="btn"><i class="fas fa-rocket"></i> Get Started</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Dots -->
+                <div class="slider-dots">
+                    <div class="dot active" data-slide="0"></div>
+                    <div class="dot" data-slide="1"></div>
+                    <div class="dot" data-slide="2"></div>
+                    <div class="dot" data-slide="3"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-number">10,000+</div>
+                        <div class="stat-label">Active Traders</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Signal Accuracy</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Why Choose Forex City?</h2>
+                    <p style="color: var(--gray-text);">We provide everything you need to succeed in forex trading</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Expert Education</h3>
+                        <p style="color: var(--gray-text);">Learn from professional traders with years of market experience. Our courses cover everything from basics to advanced strategies.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h3>Reliable Signals</h3>
+                        <p style="color: var(--gray-text);">Get accurate trading signals with detailed entry, stop loss, and take profit levels. Our signals have a proven track record of success.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Active Community</h3>
+                        <p style="color: var(--gray-text);">Join thousands of traders in our community. Share insights, discuss strategies, and grow together in our exclusive forums.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Page -->
+    <section id="courses-page" class="page" style="display: none;">
+        <div class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-graduation-cap"></i> Forex Trading Courses</h1>
+                <p style="color: var(--gray-text);">Comprehensive learning paths for traders of all levels</p>
+            </div>
+        </div>
+        
+        <div class="courses">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Our Course Offerings</h2>
+                    <p style="color: var(--gray-text);">Choose the learning path that matches your trading goals</p>
+                </div>
+                
+                <div class="course-grid">
+                    <div class="course-card">
+                        <div class="course-img">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                        <div class="course-content">
+                            <span class="course-level">Beginner</span>
+                            <h3>Forex Fundamentals</h3>
+                            <p style="color: var(--gray-text);">Learn the basics of forex trading, including currency pairs, market structure, and essential terminology.</p>
+                            <ul style="margin: 15px 0 15px 20px; color: var(--gray-text);">
+                                <li>12 video modules</li>
+                                <li>Live Q&A sessions</li>
+                                <li>Beginner trading plan</li>
+                                <li>24/7 support access</li>
+                            </ul>
+                            <div class="course-price">$20</div>
+                            <button class="btn enroll-btn" data-course="Forex Fundamentals" data-price="20"><i class="fas fa-shopping-cart"></i> Enroll Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-img">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="course-content">
+                            <span class="course-level">Intermediate</span>
+                            <h3>Technical Analysis Mastery</h3>
+                            <p style="color: var(--gray-text);">Master chart patterns, indicators, and price action strategies to identify high-probability trades.</p>
+                            <ul style="margin: 15px 0 15px 20px; color: var(--gray-text);">
+                                <li>18 video modules</li>
+                                <li>Live trading sessions</li>
+                                <li>Indicator toolkit</li>
+                                <li>Advanced chart analysis</li>
+                            </ul>
+                            <div class="course-price">$60</div>
+                            <button class="btn enroll-btn" data-course="Technical Analysis Mastery" data-price="60"><i class="fas fa-shopping-cart"></i> Enroll Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <div class="course-img">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="course-content">
+                            <span class="course-level">Advanced</span>
+                            <h3>Professional Trading Strategies</h3>
+                            <p style="color: var(--gray-text);">Advanced strategies used by professional traders, including risk management and psychology.</p>
+                            <ul style="margin: 15px 0 15px 20px; color: var(--gray-text);">
+                                <li>24 video modules</li>
+                                <li>1-on-1 mentorship</li>
+                                <li>Advanced tools access</li>
+                                <li>Risk management guide</li>
+                            </ul>
+                            <div class="course-price">$90</div>
+                            <button class="btn enroll-btn" data-course="Professional Trading Strategies" data-price="90"><i class="fas fa-shopping-cart"></i> Enroll Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Books Section -->
+        <div class="books-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2><i class="fas fa-book"></i> Trading Books & Resources</h2>
+                    <p style="color: var(--gray-text);">Expand your knowledge with our curated collection of trading books</p>
+                </div>
+                
+                <div class="books-grid">
+                    <div class="book-card">
+                        <div class="book-img">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="book-content">
+                            <h3>Forex Trading Basics</h3>
+                            <p style="color: var(--gray-text);">A comprehensive guide for beginners covering all forex fundamentals.</p>
+                            <div class="book-price">$9</div>
+                            <button class="btn btn-outline buy-book-btn" data-book="Forex Trading Basics" data-price="9"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card">
+                        <div class="book-img">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="book-content">
+                            <h3>Advanced Technical Analysis</h3>
+                            <p style="color: var(--gray-text);">Master chart patterns, indicators, and trading strategies.</p>
+                            <div class="book-price">$15</div>
+                            <button class="btn btn-outline buy-book-btn" data-book="Advanced Technical Analysis" data-price="15"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card">
+                        <div class="book-img">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="book-content">
+                            <h3>Trading Psychology</h3>
+                            <p style="color: var(--gray-text);">Develop the right mindset for successful trading.</p>
+                            <div class="book-price">$15</div>
+                            <button class="btn btn-outline buy-book-btn" data-book="Trading Psychology" data-price="15"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="book-card">
+                        <div class="book-img">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="book-content">
+                            <h3>Risk Management Guide</h3>
+                            <p style="color: var(--gray-text);">Learn how to protect your capital and manage risk effectively.</p>
+                            <div class="book-price">$15</div>
+                            <button class="btn btn-outline buy-book-btn" data-book="Risk Management Guide" data-price="15"><i class="fas fa-shopping-cart"></i> Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Groups Section -->
+        <div class="groups-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2><i class="fas fa-users"></i> Join Our Trading Groups</h2>
+                    <p style="color: var(--gray-text);">Connect with like-minded traders in our specialized groups</p>
+                </div>
+                
+                <div class="groups-grid">
+                    <div class="group-card">
+                        <div class="group-header">
+                            <h3><i class="fas fa-baby"></i> Beginner Traders Club</h3>
+                        </div>
+                        <div class="group-content">
+                            <p style="color: var(--gray-text);">A supportive community for new traders to learn and grow together. Perfect for those starting their trading journey.</p>
+                            <div class="group-members">
+                                <div class="member-avatars">
+                                    <span>JD</span>
+                                    <span>MS</span>
+                                    <span>+150</span>
+                                </div>
+                                <span>152 members</span>
+                            </div>
+                            <button class="btn join-group-btn" data-group="Day Trading Masters" data-whatsapp="https://chat.whatsapp.com/BEFNrPz3gj6C3Va9ICACxd"><i class="fas fa-user-plus"></i> Join Group</button>
+                        </div>
+                    </div>
+                    
+                    <div class="group-card">
+                        <div class="group-header">
+                            <h3><i class="fas fa-chart-line"></i> Day Trading Masters</h3>
+                        </div>
+                        <div class="group-content">
+                            <p style="color: var(--gray-text);">For experienced day traders focusing on short-term market movements and scalping strategies.</p>
+                            <div class="group-members">
+                                <div class="member-avatars">
+                                    <span>RK</span>
+                                    <span>TL</span>
+                                    <span>+230</span>
+                                </div>
+                                <span>232 members</span>
+                            </div>
+                            <button class="btn join-group-btn" data-group="Day Trading Masters" data-whatsapp="https://chat.whatsapp.com/BEFNrPz3gj6C3Va9ICACxd"><i class="fas fa-user-plus"></i> Join Group</button>
+                        </div>
+                    </div>
+                    
+                    <div class="group-card">
+                        <div class="group-header">
+                            <h3><i class="fas fa-exchange-alt"></i> Swing Trading Community</h3>
+                        </div>
+                        <div class="group-content">
+                            <p style="color: var(--gray-text);">Focus on medium-term trading strategies, market analysis, and position holding techniques.</p>
+                            <div class="group-members">
+                                <div class="member-avatars">
+                                    <span>AM</span>
+                                    <span>PS</span>
+                                    <span>+180</span>
+                                </div>
+                                <span>182 members</span>
+                            </div>
+                            <button class="btn join-group-btn" data-group="Day Trading Masters" data-whatsapp="https://chat.whatsapp.com/BEFNrPz3gj6C3Va9ICACxd"><i class="fas fa-user-plus"></i> Join Group</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signals Page -->
+    <section id="signals-page" class="page" style="display: none;">
+        <div class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-signal"></i> Forex Trading Signals</h1>
+                <p style="color: var(--gray-text);">Professional trading signals with detailed analysis</p>
+            </div>
+        </div>
+        
+        <div class="signals">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Recent Trading Signals</h2>
+                    <p style="color: var(--gray-text);">Our signals include entry, stop loss, and take profit levels</p>
+                </div>
+                
+                <div class="signal-table-container">
+                    <table class="signal-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-money-bill-wave"></i> Currency Pair</th>
+                                <th><i class="fas fa-exchange-alt"></i> Action</th>
+                                <th><i class="fas fa-bullseye"></i> Entry Price</th>
+                                <th><i class="fas fa-shield-alt"></i> Stop Loss</th>
+                                <th><i class="fas fa-trophy"></i> Take Profit</th>
+                                <th><i class="fas fa-circle"></i> Status</th>
+                                <th><i class="fas fa-chart-line"></i> Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>EUR/USD</td>
+                                <td>BUY</td>
+                                <td>1.0850</td>
+                                <td>1.0800</td>
+                                <td>1.0950</td>
+                                <td><span class="profit">Closed</span></td>
+                                <td><span class="profit">+85 pips</span></td>
+                            </tr>
+                            <tr>
+                                <td>GBP/USD</td>
+                                <td>SELL</td>
+                                <td>1.2650</td>
+                                <td>1.2700</td>
+                                <td>1.2550</td>
+                                <td><span class="profit">Closed</span></td>
+                                <td><span class="profit">+72 pips</span></td>
+                            </tr>
+                            <tr>
+                                <td>USD/JPY</td>
+                                <td>BUY</td>
+                                <td>149.80</td>
+                                <td>149.30</td>
+                                <td>150.80</td>
+                                <td><span class="profit">Active</span></td>
+                                <td>+25 pips</td>
+                            </tr>
+                            <tr>
+                                <td>AUD/USD</td>
+                                <td>SELL</td>
+                                <td>0.6520</td>
+                                <td>0.6570</td>
+                                <td>0.6420</td>
+                                <td><span class="loss">Closed</span></td>
+                                <td><span class="loss">-12 pips</span></td>
+                            </tr>
+                            <tr>
+                                <td>USD/CAD</td>
+                                <td>BUY</td>
+                                <td>1.3520</td>
+                                <td>1.3470</td>
+                                <td>1.3620</td>
+                                <td><span class="profit">Active</span></td>
+                                <td>+18 pips</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="text-align: center; margin-top: 50px;">
+                    <h3>Subscribe to Our Signal Service</h3>
+                    <p style="color: var(--gray-text); margin-bottom: 30px;">Get daily forex trading signals delivered to your email or Telegram</p>
+                    <button id="subscribeBtn" class="btn" style="padding: 18px 45px; font-size: 1.1rem;">
+                        <i class="fas fa-bell"></i> Subscribe Now - $49.99/month
+                    </button>
+                    <p style="color: var(--gray-text); margin-top: 20px; font-size: 0.9rem;">
+                        <i class="fas fa-check-circle"></i> Cancel anytime • 7-day free trial • 24/7 support
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about-page" class="page" style="display: none;">
+        <div class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-users"></i> About Us Forex City Channel</h1>
+                <p style="color: var(--gray-text);">Our mission is to democratize forex trading education</p>
+            </div>
+        </div>
+        
+        <div class="courses">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Who We Are</h2>
+                </div>
+                
+                <div style="max-width: 800px; margin: 0 auto; color: var(--gray-text); line-height: 1.8; font-size: 1.1rem;">
+                    <p style="margin-bottom: 25px;">
+                        Forex City Channel was founded in 2025 by a team of professional traders with a shared vision: 
+                        to create a comprehensive educational platform that empowers individuals to succeed in forex trading.
+                    </p>
+                    <p style="margin-bottom: 25px;">
+                        With over 2 years of combined trading experience, our team has navigated every type of market condition. 
+                        We've distilled this knowledge into structured courses, reliable signals, and a supportive community.
+                    </p>
+                    
+                    <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--light-text);">Our Values</h3>
+                    <ul style="margin-left: 20px; margin-bottom: 40px;">
+                        <li style="margin-bottom: 10px;"><strong>Transparency:</strong> We're honest about both wins and losses in trading.</li>
+                        <li style="margin-bottom: 10px;"><strong>Education First:</strong> Our primary goal is to teach you to become an independent trader.</li>
+                        <li style="margin-bottom: 10px;"><strong>Community Support:</strong> We believe in growing together as a trading community.</li>
+                        <li style="margin-bottom: 10px;"><strong>Risk Management:</strong> We emphasize protecting capital above all else.</li>
+                    </ul>
+                    
+                    <button id="aboutContactBtn" class="btn" style="margin-top: 20px;">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2><i class="fas fa-user-tie"></i> Meet Our Expert Team</h2>
+                    <p style="color: var(--gray-text);">Professional traders and educators with years of experience and the CEO</p>
+                </div>
+                
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-img">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="team-content">
+                            <h3>Tracie Wiedemann Tivanz</h3>
+                            <div class="team-role">The CEO</div>
+                            <p style="color: var(--gray-text);">She heads forex City Channel. Drives Forex City Channel to success. Manages all senior leaders </p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-img">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="team-content">
+                            <h3>Jonna Venza Tivanz</h3>
+                            <div class="team-role">Head of Education</div>
+                            <p style="color: var(--gray-text);">Specializes in technical analysis and trading psychology. Experienced in forex and Crypto</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-img">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="team-content">
+                            <h3>Mark Him</h3>
+                            <div class="team-role">Signals Director</div>
+                            <p style="color: var(--gray-text);">Expert in algorithmic trading and market analysis. Developed our proprietary signal system.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="team-card">
+                        <div class="team-img">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="team-content">
+                            <h3>Asobora Jonah</h3>
+                            <div class="team-role">Community Manager</div>
+                            <p style="color: var(--gray-text);">Building and nurturing our global trading community with over 10,000 active members.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact-page" class="page" style="display: none;">
+        <div class="page-header">
+            <div class="container">
+                <h1><i class="fas fa-envelope"></i> Contact Us</h1>
+                <p style="color: var(--gray-text);">Get in touch with our team for any inquiries</p>
+            </div>
+        </div>
+        
+        <div class="contact">
+            <div class="container">
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h2>Get In Touch</h2>
+                        <p style="color: var(--gray-text);">Have questions about our courses or signals? Reach out to our team and we'll respond within 24 hours.</p>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Our Location</h4>
+                                <p style="color: var(--gray-text);">Mukono Town, Mukono District<br>Uganda, TVNz</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Phone Number</h4>
+                                <p style="color: var(--gray-text);">+256701930285</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4>Email Address</h4>
+                                <p style="color: var(--gray-text);">support@forexcitychannel.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Business Hours</h4>
+                                <p style="color: var(--gray-text);">Monday - Friday: 9AM - 8PM<br>Saturday: 10AM - 6PM<br>Sunday: 12PM - 5PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name"><i class="fas fa-user"></i> Full Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="your@email.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject"><i class="fas fa-tag"></i> Subject</label>
+                                <input type="text" id="subject" class="form-control" placeholder="How can we help?" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message"><i class="fas fa-comment"></i> Message</label>
+                                <textarea id="message" class="form-control" rows="5" placeholder="Your message here..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn" style="width: 100%;">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Forex City</div>
+                    <p style="color: var(--gray-text);">Forex City Channel is a premier forex trading education platform providing courses, signals, and community support to traders worldwide.</p>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <a href="#" style="color: var(--gray-text); font-size: 1.3rem; transition: var(--transition);">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" style="color: var(--gray-text); font-size: 1.3rem; transition: var(--transition);">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" style="color: var(--gray-text); font-size: 1.3rem; transition: var(--transition);">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" style="color: var(--gray-text); font-size: 1.3rem; transition: var(--transition);">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" style="color: var(--gray-text); font-size: 1.3rem; transition: var(--transition);">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#" data-page="courses"><i class="fas fa-graduation-cap"></i> Courses</a></li>
+                        <li><a href="#" data-page="signals"><i class="fas fa-signal"></i> Signals</a></li>
+                        <li><a href="#" data-page="about"><i class="fas fa-users"></i> About Us</a></li>
+                        <li><a href="#" data-page="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p style="color: var(--gray-text);">Subscribe to get weekly market analysis and trading tips.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Forex City Channel. All rights reserved. | Forex trading involves substantial risk of loss and is not suitable for all investors.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-credit-card"></i> Complete Your Subscription</h2>
+            <p style="color: var(--gray-text); margin-top: 10px;">Choose your preferred payment method to subscribe to our premium signals service.</p>
+            
+            <div class="payment-options">
+                <div class="payment-option" data-method="card">
+                    <div class="payment-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div>
+                        <h4>Credit/Debit Card</h4>
+                        <p style="color: var(--gray-text);">Pay securely with Visa, Mastercard, or American Express</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option" data-method="paypal">
+                    <div class="payment-icon">
+                        <i class="fab fa-paypal"></i>
+                    </div>
+                    <div>
+                        <h4>PayPal</h4>
+                        <p style="color: var(--gray-text);">Pay using your PayPal account</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option" data-method="mobile">
+                    <div class="payment-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div>
+                        <h4>Mobile Money</h4>
+                        <p style="color: var(--gray-text);">Pay via mobile money (USSD or App)</p>
+                    </div>
+                </div>
+                
+                <div class="payment-option" data-method="bank">
+                    <div class="payment-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div>
+                        <h4>Bank Transfer</h4>
+                        <p style="color: var(--gray-text);">Transfer directly to our bank account</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Form -->
+            <form id="paymentForm" style="display: none; margin-top: 30px;">
+                <div id="cardPayment" class="payment-method-form">
+                    <h3><i class="fas fa-credit-card"></i> Card Details</h3>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" required>
+                    </div>
+                    <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                        <div class="form-group" style="flex: 1;">
+                            <label for="expiry">Expiry Date</label>
+                            <input type="text" id="expiry" class="form-control" placeholder="MM/YY" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="cvv">CVV</label>
+                            <input type="text" id="cvv" class="form-control" placeholder="123" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName" class="form-control" placeholder="John Doe" required>
+                    </div>
+                </div>
+                
+                <div id="mobilePayment" class="payment-method-form">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Money Payment</h3>
+                    <p style="color: var(--gray-text);">To pay via mobile money, use one of the following methods:</p>
+                    
+                    <div class="ussd-code">
+                        *123*1*987654321*100#
+                    </div>
+                    <p style="text-align: center; margin: 20px 0; color: var(--gray-text);">OR</p>
+                    
+                    <div class="form-group">
+                        <label for="mobileNumber">Mobile Number</label>
+                        <input type="text" id="mobileNumber" class="form-control" placeholder="Enter your mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobileProvider">Mobile Network</label>
+                        <select id="mobileProvider" class="form-control" required>
+                            <option value="">Select Provider</option>
+                            <option value="mtn">MTN Mobile Money</option>
+                            <option value="airtel">Airtel Money</option>
+                            <option value="orange">Orange Money</option>
+                            <option value="vodafone">Vodafone Cash</option>
+                            <option value="mpesa">M-Pesa</option>
+                        </select>
+                    </div>
+                    <p style="color: var(--gray-text); font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> You will receive a USSD prompt on your phone to complete the payment.
+                        API integration will process your payment automatically.
+                    </p>
+                </div>
+                
+                <div id="bankPayment" class="payment-method-form">
+                    <h3><i class="fas fa-university"></i> Bank Transfer Details</h3>
+                    <p style="color: var(--gray-text);">Transfer your payment to the following account:</p>
+                    <div style="background: rgba(255, 107, 0, 0.1); padding: 20px; border-radius: 10px; margin: 20px 0; border: 1px solid rgba(255, 107, 0, 0.2);">
+                        <p><strong>Bank:</strong> Global Trust Bank</p>
+                        <p><strong>Account Name:</strong> Forex City Channel Ltd</p>
+                        <p><strong>Account Number:</strong> 1234567890</p>
+                        <p><strong>SWIFT/BIC:</strong> GTBKUS33</p>
+                        <p><strong>Reference:</strong> Your Email Address</p>
+                    </div>
+                    <p style="color: var(--gray-text); font-size: 0.9rem;">
+                        <i class="fas fa-info-circle"></i> After making the transfer, please email the receipt to payments@forexcitychannel.com
+                    </p>
+                </div>
+                
+                <div class="form-group" style="margin-top: 25px;">
+                    <label for="emailPayment"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="emailPayment" class="form-control" placeholder="your@email.com" required>
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px; padding: 18px;">
+                    <i class="fas fa-lock"></i> Complete Payment - $49.99/month
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enrollment Modal -->
+    <div id="enrollModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2><i class="fas fa-graduation-cap"></i> Enroll in Course</h2>
+            <p id="enrollCourseDescription" style="color: var(--gray-text); margin-top: 10px;">Complete the form below to enroll in this course.</p>
+            
+            <form id="enrollForm">
+                <div class="form-group">
+                    <label for="enrollName"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="enrollName" class="form-control" placeholder="Your Name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="enrollEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="enrollEmail" class="form-control" placeholder="your@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="enrollPhone"><i class="fas fa-phone"></i> Phone Number</label>
+                    <input type="text" id="enrollPhone" class="form-control" placeholder="+1 (555) 123-4567" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="enrollExperience"><i class="fas fa-chart-line"></i> Trading Experience</label>
+                    <select id="enrollExperience" class="form-control" required>
+                        <option value="">Select Experience Level</option>
+                        <option value="beginner">Beginner (0-6 months)</option>
+                        <option value="intermediate">Intermediate (6 months - 2 years)</option>
+                        <option value="advanced">Advanced (2+ years)</option>
+                    </select>
+                </div>
+                
+                <div id="coursePriceDisplay" style="text-align: center; margin: 25px 0; padding: 20px; background: rgba(255, 107, 0, 0.1); border-radius: 10px; border: 1px solid rgba(255, 107, 0, 0.2);">
+                    <h3 style="color: var(--primary-orange);">Course Price: <span id="coursePrice">$120</span></h3>
+                    <p style="color: var(--gray-text); margin-top: 5px; font-size: 0.9rem;">Lifetime access • Certificate included • 7-day money back guarantee</p>
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%; padding: 18px;">
+                    <i class="fas fa-lock"></i> Proceed to Payment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div style="text-align: center; padding: 30px;">
+                <div style="font-size: 5rem; color: var(--success); margin-bottom: 25px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 id="successTitle">Success!</h2>
+                <p id="successMessage" style="color: var(--gray-text); margin: 20px 0 30px; font-size: 1.1rem; line-height: 1.6;">
+                    Your request has been submitted successfully. Our team will contact you shortly.
+                </p>
+                <button class="btn" id="closeSuccessModal" style="padding: 16px 40px;">
+                    <i class="fas fa-check"></i> Continue
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('nav a, .footer-links a');
+        const pages = document.querySelectorAll('.page');
+        const dots = document.querySelectorAll('.dot');
+        const slider = document.querySelector('.slider');
+        
+        // Button elements
+        const exploreCoursesBtn = document.getElementById('exploreCoursesBtn');
+        const exploreCoursesBtn2 = document.getElementById('exploreCoursesBtn2');
+        const viewSignalsBtn = document.getElementById('viewSignalsBtn');
+        const viewSignalsBtn2 = document.getElementById('viewSignalsBtn2');
+        const enrollButtons = document.querySelectorAll('.enroll-btn');
+        const buyBookButtons = document.querySelectorAll('.buy-book-btn');
+        const joinGroupButtons = document.querySelectorAll('.join-group-btn');
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const aboutContactBtn = document.getElementById('aboutContactBtn');
+        const contactForm = document.getElementById('contactForm');
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        // Modal elements
+        const paymentModal = document.getElementById('paymentModal');
+        const enrollModal = document.getElementById('enrollModal');
+        const successModal = document.getElementById('successModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const closeSuccessModalBtn = document.getElementById('closeSuccessModal');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const paymentForm = document.getElementById('paymentForm');
+        const enrollForm = document.getElementById('enrollForm');
+        
+        // Slider functionality
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let slideInterval;
+        
+        function startSlider() {
+            slideInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }, 5000);
+        }
+        
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentSlide * 25}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+                clearInterval(slideInterval);
+                startSlider();
+            });
+        });
+        
+        // Navigation Functions
+        function showPage(pageId) {
+            // Hide all pages
+            pages.forEach(page => {
+                page.style.display = 'none';
+            });
+            
+            // Show target page
+            document.getElementById(`${pageId}-page`).style.display = 'block';
+            
+            // Update active class in navigation
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-page') === pageId) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close mobile menu if open
+            if (window.innerWidth <= 768) {
+                navMenu.style.display = 'none';
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+            
+            // Scroll to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Mobile Menu Toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            const isVisible = navMenu.style.display === 'flex';
+            navMenu.style.display = isVisible ? 'none' : 'flex';
+            mobileMenuBtn.innerHTML = isVisible ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-times"></i>';
+        });
+        
+        // Navigation Links
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                if (pageId) {
+                    showPage(pageId);
+                }
+            });
+        });
+        
+        // Home Page Buttons
+        exploreCoursesBtn.addEventListener('click', () => showPage('courses'));
+        exploreCoursesBtn2.addEventListener('click', () => showPage('courses'));
+        viewSignalsBtn.addEventListener('click', () => showPage('signals'));
+        viewSignalsBtn2.addEventListener('click', () => showPage('signals'));
+        
+        // Course Enrollment Buttons
+        enrollButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const courseName = button.getAttribute('data-course');
+                const coursePrice = button.getAttribute('data-price');
+                
+                document.getElementById('enrollCourseTitle').textContent = `Enroll in ${courseName}`;
+                document.getElementById('coursePrice').textContent = `$${coursePrice}`;
+                document.getElementById('enrollCourseDescription').textContent = 
+                    `Complete the form below to enroll in "${courseName}" course.`;
+                
+                enrollModal.style.display = 'flex';
+            });
+        });
+        
+        // Book Purchase Buttons
+        buyBookButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const bookName = button.getAttribute('data-book');
+                const bookPrice = button.getAttribute('data-price');
+                showSuccessModal('Book Purchase', `You are purchasing "${bookName}" for $${bookPrice}. You will be redirected to the secure checkout page.`);
+            });
+        });
+        
+// Group Join Buttons
+joinGroupButtons.forEach(button => {
+    button.addEventListener('click', () => {
+
+        const groupName = button.getAttribute('data-group');
+        const whatsappLink = button.getAttribute('data-whatsapp'); 
+        // Example: https://chat.whatsapp.com/Venza
+
+        // 1. Open the WhatsApp group in a new tab/window
+        if (whatsappLink) {
+            window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+        } else {
+            console.warn("WhatsApp link missing on button");
+        }
+
+        // 2. Show your internal success modal (optional)
+        showSuccessModal(
+            'Join Group',
+            `You are being redirected to the WhatsApp group "${groupName}".`
+        );
+    });
+});
+
+        
+        // Signals Subscription Button
+        subscribeBtn.addEventListener('click', () => {
+            paymentModal.style.display = 'flex';
+        });
+        
+        // About Page Contact Button
+        aboutContactBtn.addEventListener('click', () => showPage('contact'));
+        
+        // Modal Management
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                paymentModal.style.display = 'none';
+                enrollModal.style.display = 'none';
+                successModal.style.display = 'none';
+            });
+        });
+        
+        closeSuccessModalBtn.addEventListener('click', () => {
+            successModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === paymentModal) paymentModal.style.display = 'none';
+            if (e.target === enrollModal) enrollModal.style.display = 'none';
+            if (e.target === successModal) successModal.style.display = 'none';
+        });
+        
+        // Payment Method Selection
+        let selectedPaymentMethod = 'card';
+        
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                paymentOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                selectedPaymentMethod = option.getAttribute('data-method');
+                
+                // Hide all payment method forms
+                document.querySelectorAll('.payment-method-form').forEach(form => {
+                    form.style.display = 'none';
+                });
+                
+                // Show selected payment method form
+                document.getElementById(`${selectedPaymentMethod}Payment`).style.display = 'block';
+                paymentForm.style.display = 'block';
+            });
+        });
+        
+        // Initialize with card payment selected
+        paymentOptions[0].click();
+        
+        // Form Submissions
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showSuccessModal('Message Sent!', 'Thank you for contacting Forex City Channel. We will respond to your inquiry within 24 hours.');
+            contactForm.reset();
+        });
+        
+        enrollForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const courseName = document.getElementById('enrollCourseTitle').textContent.replace('Enroll in ', '');
+            showSuccessModal('Enrollment Started!', `Your enrollment request for "${courseName}" has been received. Our team will contact you with payment instructions shortly.`);
+            enrollForm.reset();
+            enrollModal.style.display = 'none';
+        });
+        
+        paymentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showSuccessModal('Subscription Processing!', 'Your subscription request has been received. For mobile money payments, please complete the USSD prompt on your phone. For other methods, you will receive a confirmation email shortly.');
+            paymentForm.reset();
+            paymentModal.style.display = 'none';
+        });
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            showSuccessModal('Subscribed!', 'Thank you for subscribing to our newsletter! You will receive weekly market analysis and trading tips.');
+            newsletterForm.reset();
+        });
+        
+        // Helper Functions
+        function showSuccessModal(title, message) {
+            document.getElementById('successTitle').textContent = title;
+            document.getElementById('successMessage').textContent = message;
+            successModal.style.display = 'flex';
+        }
+        
+        // Touch Events for Mobile
+        function setupTouchEvents() {
+            const buttons = document.querySelectorAll('.btn, .payment-option, nav a, .dot');
+            
+            buttons.forEach(button => {
+                button.addEventListener('touchstart', function() {
+                    this.style.opacity = '0.8';
+                }, { passive: true });
+                
+                button.addEventListener('touchend', function() {
+                    this.style.opacity = '';
+                }, { passive: true });
+            });
+        }
+        
+        // Initialize
+        showPage('home');
+        startSlider();
+        setupTouchEvents();
+        
+        // Update copyright year
+        document.querySelector('.copyright p').innerHTML = 
+            document.querySelector('.copyright p').innerHTML.replace('2023', new Date().getFullYear());
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.style.display = 'flex';
+            } else {
+                navMenu.style.display = 'none';
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    </script>
+</body>
+</html>

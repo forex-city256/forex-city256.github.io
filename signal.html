@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Forex City Channel Signals Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        /* CSS Reset for cross-device compatibility */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(255, 102, 0, 0.2);
+        }
+        
+        :root {
+            /* Color Palette */
+            --primary-black: #0a0a0a;
+            --secondary-black: #121212;
+            --tertiary-black: #1a1a1a;
+            --card-black: #1e1e1e;
+            --primary-orange: #ff6600;
+            --secondary-orange: #ff8533;
+            --accent-orange: #ff9900;
+            --light-orange: #ffa64d;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --text-muted: #888888;
+            --buy-color: #2ecc71;
+            --sell-color: #e74c3c;
+            --hold-color: #f39c12;
+            --border-color: #333333;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            
+            /* Responsive spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 0.75rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-xxl: 3rem;
+            
+            /* Border radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            /* Font sizes */
+            --font-xs: 0.75rem;
+            --font-sm: 0.875rem;
+            --font-md: 1rem;
+            --font-lg: 1.125rem;
+            --font-xl: 1.25rem;
+            --font-xxl: 1.5rem;
+            --font-xxxl: 2rem;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--primary-black);
+            color: var(--text-primary);
+            line-height: 1.6;
+            font-size: var(--font-md);
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--secondary-black);
+            border-bottom: 2px solid var(--primary-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: var(--spacing-md) 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .logo-icon {
+            background-color: var(--primary-orange);
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-xl);
+            color: var(--primary-black);
+        }
+        
+        .logo-text h1 {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-orange), var(--accent-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+        }
+        
+        .header-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--spacing-xs);
+        }
+        
+        .current-time {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .market-status {
+            font-size: var(--font-xs);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--buy-color);
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: var(--font-xl);
+            cursor: pointer;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: var(--tertiary-black);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-sm) 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .nav-container::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-md);
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-orange);
+            background-color: rgba(255, 102, 0, 0.1);
+        }
+        
+        .nav-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        /* Main Content */
+        main {
+            padding: var(--spacing-lg) 0;
+        }
+        
+        /* Dashboard Summary Cards */
+        .dashboard-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .summary-card {
+            background-color: var(--card-black);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            border-left: 4px solid var(--primary-orange);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 102, 0, 0.1);
+        }
+        
+        .summary-card h3 {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+        }
+        
+        .summary-card .value {
+            font-size: var(--font-xxl);
+            font-weight: 700;
+            color: var(--primary-orange);
+            line-height: 1.2;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .summary-card .change {
+            display: flex;
+            align-items: center;
+            font-size: var(--font-sm);
+            font-weight: 500;
+        }
+        
+        .change.positive {
+            color: var(--buy-color);
+        }
+        
+        .change.negative {
+            color: var(--sell-color);
+        }
+        
+        /* Forex Pairs Section */
+        .forex-pairs-section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        
+        .section-header h2 {
+            font-size: var(--font-xl);
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+        
+        .section-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        /* Forex Pairs Grid */
+        .forex-pairs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .forex-pair-card {
+            background-color: var(--card-black);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: 0 4px 12px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+        
+        .forex-pair-card:hover {
+            border-color: var(--primary-orange);
+            box-shadow: 0 6px 16px rgba(255, 102, 0, 0.15);
+        }
+        
+        .pair-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .pair-name {
+            font-size: var(--font-lg);
+            font-weight: 600;
+        }
+        
+        .pair-name span {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .signal-badge {
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .signal-badge.buy {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--buy-color);
+        }
+        
+        .signal-badge.sell {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--sell-color);
+        }
+        
+        .signal-badge.hold {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--hold-color);
+        }
+        
+        .pair-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .price {
+            font-size: var(--font-xxl);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .price-change {
+            font-size: var(--font-md);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .price-change.positive {
+            color: var(--buy-color);
+        }
+        
+        .price-change.negative {
+            color: var(--sell-color);
+        }
+        
+        .pair-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .info-label {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+        
+        .info-value {
+            font-size: var(--font-md);
+            font-weight: 500;
+        }
+        
+        .pair-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+        
+        /* Active Signals Table */
+        .active-signals-section {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .signals-table-container {
+            background-color: var(--card-black);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        
+        .signals-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .signals-table thead {
+            background-color: var(--tertiary-black);
+        }
+        
+        .signals-table th {
+            text-align: left;
+            padding: var(--spacing-md);
+            font-weight: 600;
+            color: var(--accent-orange);
+            font-size: var(--font-sm);
+            white-space: nowrap;
+        }
+        
+        .signals-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.2s ease;
+        }
+        
+        .signals-table tbody tr:hover {
+            background-color: rgba(255, 102, 0, 0.05);
+        }
+        
+        .signals-table td {
+            padding: var(--spacing-md);
+            font-size: var(--font-sm);
+        }
+        
+        .signal-type {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-xs);
+            font-weight: 700;
+        }
+        
+        .signal-type.buy {
+            background-color: var(--buy-color);
+            color: white;
+        }
+        
+        .signal-type.sell {
+            background-color: var(--sell-color);
+            color: white;
+        }
+        
+        .take-profit, .stop-loss {
+            font-weight: 500;
+        }
+        
+        .signal-status {
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--buy-color);
+        }
+        
+        .status-pending {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--hold-color);
+        }
+        
+        .status-expired {
+            background-color: rgba(149, 165, 166, 0.2);
+            color: #95a5a6;
+        }
+        
+        /* Market Analysis Section */
+        .market-analysis-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .analysis-card {
+            background-color: var(--card-black);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+        
+        .analysis-card h3 {
+            font-size: var(--font-lg);
+            color: var(--accent-orange);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .analysis-list {
+            list-style: none;
+        }
+        
+        .analysis-list li {
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .analysis-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .analysis-currency {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .currency-flag {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-xs);
+            color: var(--primary-black);
+            font-weight: 700;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-black);
+            border-top: 1px solid var(--border-color);
+            padding: var(--spacing-xl) 0;
+            margin-top: var(--spacing-xl);
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-xl);
+        }
+        
+        .footer-section h4 {
+            color: var(--accent-orange);
+            font-size: var(--font-md);
+            margin-bottom: var(--spacing-md);
+            font-weight: 600;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-orange);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: var(--font-sm);
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 10px 18px;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: var(--font-sm);
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-orange);
+            color: var(--primary-black);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-orange);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary-orange);
+            color: var(--primary-orange);
+            transform: translateY(-2px);
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: var(--font-xs);
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 1024px) {
+            .forex-pairs-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xl: 1.5rem;
+                --spacing-xxl: 2rem;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .header-info {
+                align-items: flex-start;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                position: absolute;
+                top: var(--spacing-md);
+                right: var(--spacing-md);
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+                overflow: visible;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                display: none;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                margin-top: var(--spacing-md);
+            }
+            
+            .nav-actions {
+                width: 100%;
+                justify-content: flex-start;
+                margin-top: var(--spacing-md);
+                display: none;
+            }
+            
+            .nav-actions.active {
+                display: flex;
+            }
+            
+            .signals-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .dashboard-summary {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .forex-pairs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .section-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+            
+            .dashboard-summary {
+                grid-template-columns: 1fr;
+            }
+            
+            .pair-details {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+            
+            .pair-info {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+            }
+            
+            .pair-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* iPhone specific optimizations */
+        @supports (-webkit-touch-callout: none) {
+            .btn {
+                padding: 12px 18px; /* Larger touch target for iOS */
+            }
+        }
+        
+        /* Samsung/Android specific optimizations */
+        @media (-android) {
+            body {
+                -webkit-font-smoothing: auto; /* Better font rendering on Android */
+            }
+        }
+        
+        /* Utility Classes */
+        .hidden-mobile {
+            display: none;
+        }
+        
+        @media (min-width: 769px) {
+            .hidden-mobile {
+                display: block;
+            }
+            
+            .hidden-desktop {
+                display: none;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--text-muted);
+            border-top: 2px solid var(--primary-orange);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Forex City Channel</h1>
+                    <p>Real-Time Trading Signals & Analysis <br>From Forex City Channel</p>
+                </div>
+            </div>
+            
+            <div class="header-info">
+                <div class="current-time" id="current-time">Loading...</div>
+                <div class="market-status">Market: Open</div>
+            </div>
+            
+         
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+       
+            </ul>
+            
+            <div class="nav-actions" id="nav-actions">
+                <button class="btn btn-secondary btn-small">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+                <button class="btn btn-primary btn-small">
+                    <i class="fas fa-plus"></i> New Alert
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Dashboard Summary -->
+        <section class="dashboard-summary">
+            <div class="summary-card">
+                <h3>Active Signals</h3>
+                <div class="value">24</div>
+                <div class="change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+3 today</span>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <h3>Success Rate</h3>
+                <div class="value">78.5%</div>
+                <div class="change positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>+2.1% this week</span>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <h3>Avg. Profit per Trade</h3>
+                <div class="value">42.3 pips</div>
+                <div class="change negative">
+                    <i class="fas fa-arrow-down"></i>
+                    <span>-1.2 pips today</span>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <h3>Risk Level</h3>
+                <div class="value">Medium</div>
+                <div class="change">
+                    <i class="fas fa-minus"></i>
+                    <span>Stable</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Forex Pairs Section -->
+        <section class="forex-pairs-section">
+            <div class="section-header">
+                <h2><i class="fas fa-money-bill-wave"></i> Major Forex Pairs</h2>
+                <div class="section-actions">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-filter"></i> Filter
+                    </button>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+            
+            <div class="forex-pairs-grid">
+                <!-- EUR/USD Card -->
+                <div class="forex-pair-card">
+                    <div class="pair-header">
+                        <div class="pair-name">EUR/USD <span>Euro / US Dollar</span></div>
+                        <div class="signal-badge buy">BUY</div>
+                    </div>
+                    
+                    <div class="pair-details">
+                        <div class="price">1.0874</div>
+                        <div class="price-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+0.42%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pair-info">
+                        <div class="info-item">
+                            <div class="info-label">Signal Strength</div>
+                            <div class="info-value">Strong</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Timeframe</div>
+                            <div class="info-value">4H</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Expires In</div>
+                            <div class="info-value">12:45</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pair-actions">
+                        <button class="btn btn-secondary btn-small">
+                            <i class="fas fa-chart-line"></i> Analyze
+                        </button>
+                        <button class="btn btn-primary btn-small">
+                            <i class="fas fa-play"></i> Execute
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- GBP/USD Card -->
+                <div class="forex-pair-card">
+                    <div class="pair-header">
+                        <div class="pair-name">GBP/USD <span>British Pound / US Dollar</span></div>
+                        <div class="signal-badge sell">SELL</div>
+                    </div>
+                    
+                    <div class="pair-details">
+                        <div class="price">1.2712</div>
+                        <div class="price-change negative">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>-0.18%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pair-info">
+                        <div class="info-item">
+                            <div class="info-label">Signal Strength</div>
+                            <div class="info-value">Medium</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Timeframe</div>
+                            <div class="info-value">1H</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Expires In</div>
+                            <div class="info-value">06:30</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pair-actions">
+                        <button class="btn btn-secondary btn-small">
+                            <i class="fas fa-chart-line"></i> Analyze
+                        </button>
+                        <button class="btn btn-primary btn-small">
+                            <i class="fas fa-play"></i> Execute
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- USD/JPY Card -->
+                <div class="forex-pair-card">
+                    <div class="pair-header">
+                        <div class="pair-name">USD/JPY <span>US Dollar / Japanese Yen</span></div>
+                        <div class="signal-badge hold">HOLD</div>
+                    </div>
+                    
+                    <div class="pair-details">
+                        <div class="price">149.85</div>
+                        <div class="price-change positive">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+0.25%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pair-info">
+                        <div class="info-item">
+                            <div class="info-label">Signal Strength</div>
+                            <div class="info-value">Weak</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Timeframe</div>
+                            <div class="info-value">Daily</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Expires In</div>
+                            <div class="info-value">1 day</div>
+                        </div>
+                    </div>
+                    
+                    <div class="pair-actions">
+                        <button class="btn btn-secondary btn-small">
+                            <i class="fas fa-chart-line"></i> Analyze
+                        </button>
+                        <button class="btn btn-primary btn-small">
+                            <i class="fas fa-bell"></i> Alert
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Active Signals Table -->
+        <section class="active-signals-section">
+            <div class="section-header">
+                <h2><i class="fas fa-bolt"></i> Active Trading Signals</h2>
+                <div class="section-actions">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-history"></i> History
+                    </button>
+                </div>
+            </div>
+            
+            <div class="signals-table-container">
+                <table class="signals-table">
+                    <thead>
+                        <tr>
+                            <th>Signal</th>
+                            <th>Pair</th>
+                            <th>Type</th>
+                            <th>Entry Price</th>
+                            <th>Take Profit</th>
+                            <th>Stop Loss</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="signal-type buy">B</div></td>
+                            <td><strong>EUR/USD</strong></td>
+                            <td>Breakout</td>
+                            <td>1.0865</td>
+                            <td class="take-profit">1.0920</td>
+                            <td class="stop-loss">1.0820</td>
+                            <td><span class="signal-status status-active">Active</span></td>
+                            <td><button class="btn btn-primary btn-small">View</button></td>
+                        </tr>
+                        <tr>
+                            <td><div class="signal-type sell">S</div></td>
+                            <td><strong>GBP/USD</strong></td>
+                            <td>Reversal</td>
+                            <td>1.2725</td>
+                            <td class="take-profit">1.2650</td>
+                            <td class="stop-loss">1.2780</td>
+                            <td><span class="signal-status status-active">Active</span></td>
+                            <td><button class="btn btn-primary btn-small">View</button></td>
+                        </tr>
+                        <tr>
+                            <td><div class="signal-type buy">B</div></td>
+                            <td><strong>AUD/USD</strong></td>
+                            <td>Trend</td>
+                            <td>0.6520</td>
+                            <td class="take-profit">0.6580</td>
+                            <td class="stop-loss">0.6480</td>
+                            <td><span class="signal-status status-pending">Pending</span></td>
+                            <td><button class="btn btn-secondary btn-small">Wait</button></td>
+                        </tr>
+                        <tr>
+                            <td><div class="signal-type sell">S</div></td>
+                            <td><strong>USD/CAD</strong></td>
+                            <td>Breakout</td>
+                            <td>1.3580</td>
+                            <td class="take-profit">1.3500</td>
+                            <td class="stop-loss">1.3650</td>
+                            <td><span class="signal-status status-active">Active</span></td>
+                            <td><button class="btn btn-primary btn-small">View</button></td>
+                        </tr>
+                        <tr>
+                            <td><div class="signal-type buy">B</div></td>
+                            <td><strong>NZD/USD</strong></td>
+                            <td>Trend</td>
+                            <td>0.5985</td>
+                            <td class="take-profit">0.6030</td>
+                            <td class="stop-loss">0.5950</td>
+                            <td><span class="signal-status status-expired">Expired</span></td>
+                            <td><button class="btn btn-secondary btn-small">Review</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Market Analysis Section -->
+        <section class="market-analysis-section">
+            <div class="analysis-card">
+                <h3><i class="fas fa-chart-pie"></i> Market Sentiment</h3>
+                <ul class="analysis-list">
+                    <li>
+                        <div class="analysis-currency">
+                            <div class="currency-flag">EUR</div>
+                            <span>Euro</span>
+                        </div>
+                        <span class="price-change positive">Bullish</span>
+                    </li>
+                    <li>
+                        <div class="analysis-currency">
+                            <div class="currency-flag">USD</div>
+                            <span>US Dollar</span>
+                        </div>
+                        <span class="price-change negative">Bearish</span>
+                    </li>
+                    <li>
+                        <div class="analysis-currency">
+                            <div class="currency-flag">GBP</div>
+                            <span>British Pound</span>
+                        </div>
+                        <span class="price-change negative">Bearish</span>
+                    </li>
+                    <li>
+                        <div class="analysis-currency">
+                            <div class="currency-flag">JPY</div>
+                            <span>Japanese Yen</span>
+                        </div>
+                        <span class="price-change positive">Bullish</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="analysis-card">
+                <h3><i class="fas fa-exclamation-triangle"></i> Risk Advisory</h3>
+                <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                    High impact news expected in 2 hours: US Non-Farm Payroll data release. Expect increased volatility across all USD pairs.
+                </p>
+                <div style="background-color: rgba(243, 156, 18, 0.1); padding: var(--spacing-md); border-radius: var(--radius-sm); border-left: 3px solid var(--hold-color);">
+                    <strong style="color: var(--hold-color);">Warning:</strong> Reduce position sizes or avoid new entries 30 minutes before news release.
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h4>Forex City Channel</h4>
+                    <p style="color: var(--text-secondary); font-size: var(--font-sm);">
+                        Professional forex trading signals and market analysis. Real-time alerts, technical analysis, and risk management tools.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Live Signals</a></li>
+                        <li><a href="#">Market Analysis</a></li>
+                        <li><a href="#">Economic Calendar</a></li>
+                        <li><a href="#">Risk Calculator</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Education Center</a></li>
+                        <li><a href="#">Trading Glossary</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Risk Warning</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2023 City Channel Pro. All rights reserved. Forex trading involves substantial risk of loss and is not suitable for all investors.</p>
+                <p style="margin-top: var(--spacing-sm); font-size: var(--font-xs);">
+                    <i class="fas fa-exclamation-circle"></i> Past performance is not indicative of future results.
+                </p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle functionality
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('nav-links');
+            const navActions = document.getElementById('nav-actions');
+            
+            navLinks.classList.toggle('active');
+            navActions.classList.toggle('active');
+            
+            // Change icon
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                weekday: 'short',
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZoneName: 'short'
+            };
+            
+            // Format for display
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false 
+            });
+            
+            const dateString = now.toLocaleDateString('en-US', { 
+                weekday: 'short',
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric'
+            });
+            
+            document.getElementById('current-time').innerHTML = `
+                <i class="fas fa-clock"></i> ${dateString} ${timeString} GMT
+            `;
+        }
+        
+        // Update time immediately and then every second
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        // Simulate live price updates
+        function updatePrices() {
+            const priceElements = document.querySelectorAll('.price');
+            
+            priceElements.forEach(element => {
+                const currentPrice = parseFloat(element.textContent);
+                const change = (Math.random() - 0.5) * 0.001; // Small random change
+                const newPrice = currentPrice + change;
+                
+                // Update price with animation
+                element.style.color = change >= 0 ? 'var(--buy-color)' : 'var(--sell-color)';
+                element.textContent = newPrice.toFixed(4);
+                
+                // Reset color after animation
+                setTimeout(() => {
+                    element.style.color = '';
+                }, 500);
+            });
+        }
+        
+        // Update prices every 10 seconds
+        setInterval(updatePrices, 10000);
+        
+        // Execute trade button functionality
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            if (button.textContent.includes('Execute')) {
+                button.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<span class="loading-spinner"></span> Executing...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-check"></i> Executed';
+                        this.style.backgroundColor = 'var(--buy-color)';
+                        
+                        // Reset after 3 seconds
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.disabled = false;
+                            this.style.backgroundColor = '';
+                        }, 3000);
+                    }, 1500);
+                });
+            }
+        });
+        
+        // Refresh button functionality
+        document.querySelectorAll('.btn').forEach(button => {
+            if (button.textContent.includes('Refresh')) {
+                button.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<span class="loading-spinner"></span> Refreshing...';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        
+                        // Show notification
+                        const notification = document.createElement('div');
+                        notification.style.cssText = `
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            background-color: var(--primary-orange);
+                            color: var(--primary-black);
+                            padding: 12px 20px;
+                            border-radius: var(--radius-md);
+                            font-weight: 600;
+                            z-index: 1000;
+                            box-shadow: 0 4px 12px var(--shadow-color);
+                            animation: slideIn 0.3s ease;
+                        `;
+                        
+                        notification.textContent = 'Data refreshed successfully!';
+                        document.body.appendChild(notification);
+                        
+                        setTimeout(() => {
+                            notification.style.animation = 'slideOut 0.3s ease';
+                            setTimeout(() => notification.remove(), 300);
+                        }, 3000);
+                    }, 1000);
+                });
+            }
+        });
+        
+        // Add CSS for notification animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Touch device optimizations
+        if ('ontouchstart' in window) {
+            // Increase tap targets on touch devices
+            document.querySelectorAll('button, a').forEach(element => {
+                element.style.minHeight = '44px';
+                element.style.minWidth = '44px';
+                element.style.display = 'flex';
+                element.style.alignItems = 'center';
+                element.style.justifyContent = 'center';
+            });
+        }
+    </script>
+</body>
+</html>
